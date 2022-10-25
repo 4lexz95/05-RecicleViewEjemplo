@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/todo_model_alert.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/todo_view_model.xml" value="0.33" />
       </map>
     </option>

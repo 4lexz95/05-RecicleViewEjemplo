@@ -60,16 +60,49 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoVH> {
         holder.btnCompletado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                confirmUpdate("SEGURO, SEGUROOOOO", ToDo);
+                confirmUpdate("SEGURO, SEGUROOOOO", todo).show();
                 todo.setCompletado(!todo.isCompletado());
                 notifyDataSetChanged();
 
             }
         });
+
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirmDelete("Vas a eliminar una tarea", holder.getAdapterPosition()).show();
+                /*
+                //objects.remove(todo);
+                objects.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
+
+                 */
+            }
+        });
+    }
+    private AlertDialog confirmDelete(String titulo, int posicion){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(titulo);
+        builder.setCancelable(false);
+
+        builder.setNegativeButton("No", null);
+        builder.setPositiveButton("siii", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+               objects.remove(posicion);
+                notifyItemRemoved(posicion);
+
+
+            }
+        });
+        // se crea la ventana y con el .show lo muestra
+        return builder.create();
     }
  // cuantos objectos va a mostrar (el tamaño de la lista)
     @Override
     public int getItemCount() {
+
         return objects.size();
     }
 
@@ -89,6 +122,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoVH> {
         return builder.create();
 
 
+
     }
 
     public class ToDoVH extends RecyclerView.ViewHolder{
@@ -96,6 +130,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoVH> {
 
         TextView lblTitulo , lblContenido, lblFecha;
         ImageButton btnCompletado;
+        ImageButton btnDelete;
 
 
 
@@ -107,6 +142,8 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoVH> {
             lblContenido = itemView.findViewById(R.id.lbContenidoToDoViewModel);
             lblFecha = itemView.findViewById(R.id.lbFechaToDoViewModel);
             btnCompletado = itemView.findViewById(R.id.btnCompletadoToDoViewModel);
+            btnDelete = itemView.findViewById(R.id.btndeleteTodo);
+
 
         }
     }
